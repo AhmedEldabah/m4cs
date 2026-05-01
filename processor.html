@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <canvas id="canvas" style="display:none;"></canvas>
+  <script>
+    const colors = [
+      { id: 'front_yellow', src: 'images/front.png', filter: 'hue-rotate(-65deg) brightness(1.2) saturate(1.2)' },
+      { id: 'front_grey', src: 'images/front.png', filter: 'saturate(0) brightness(1.3)' },
+      { id: 'front_red', src: 'images/front.png', filter: 'hue-rotate(-130deg) brightness(1.1) saturate(1.1)' }
+    ];
+
+    let loaded = 0;
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function processNext() {
+      if (loaded >= colors.length) {
+        document.body.innerHTML += '<h1>DONE</h1>';
+        return;
+      }
+      
+      const c = colors[loaded];
+      const img = new Image();
+      img.src = c.src;
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.filter = c.filter;
+        ctx.drawImage(img, 0, 0);
+        
+        const dataUrl = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = c.id + '.png';
+        document.body.appendChild(a);
+        a.click();
+        
+        loaded++;
+        setTimeout(processNext, 1000); // Wait a second before next download
+      };
+    }
+    
+    processNext();
+  </script>
+</body>
+</html>
