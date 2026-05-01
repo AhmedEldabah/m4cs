@@ -616,6 +616,7 @@
 <script type="module">
   import * as THREE from 'three';
   import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+  import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
   import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -679,6 +680,13 @@
   let carModel;
   let bodyMaterials = [];
   let wheelMaterials = [];
+
+  // Setup Loaders
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+
+  const loader = new GLTFLoader();
+  loader.setDRACOLoader(dracoLoader);
 
   new RGBELoader()
     .setPath('https://unpkg.com/three@0.160.0/examples/textures/equirectangular/')
