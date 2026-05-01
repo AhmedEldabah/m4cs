@@ -3,19 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>BMW M4 CS · Configure Yours</title>
+<title>BMW M4 Competition · Configure Yours</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- Three.js Import Map -->
-<script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-    }
-  }
-</script>
+
 <style>
   :root {
     --bg: #050505;
@@ -138,26 +130,14 @@
     justify-content: center;
     overflow: hidden;
   }
-  .viewer canvas { 
-    width: 100% !important; 
-    height: 100% !important; 
-    object-fit: contain; 
+  .viewer img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
     z-index: 4;
-    outline: none;
-    cursor: grab;
+    transition: opacity 0.5s ease-in-out;
   }
-  .viewer canvas:active { cursor: grabbing; }
-  #loader {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim);
-    z-index: 10; letter-spacing: 4px;
-    display: flex; flex-direction: column; align-items: center; gap: 16px;
-  }
-  #loader::after {
-    content: ""; width: 40px; height: 1px; background: var(--accent);
-    animation: loader-line 1.5s ease-in-out infinite;
-  }
-  @keyframes loader-line { 0% { width: 0; } 50% { width: 60px; } 100% { width: 0; } }
+  .viewer img.loading { opacity: 0; }
   .viewer-instructions {
     position: absolute; bottom: 12px; left: 12px; z-index: 5;
     background: rgba(0,0,0,.65); border: 1px solid var(--line);
@@ -363,7 +343,7 @@
       <div class="logo"></div>
       <div class="brand-text">
         <small>BMW M GMBH</small>
-        <strong>The M4 CS Configurator</strong>
+        <strong>The M4 Competition Configurator</strong>
       </div>
       <span class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></span>
     </div>
@@ -372,11 +352,11 @@
 </header>
 
 <section class="hero">
-  <div class="hero-eyebrow">Limited Series · Plant Dingolfing</div>
-  <h1>M4 CS<br><em>SHARPER. LIGHTER.</em></h1>
+  <div class="hero-eyebrow">M Performance · Plant Dingolfing</div>
+  <h1>M4 Competition<br><em>UNCOMPROMISING PERFORMANCE.</em></h1>
   <p class="hero-sub">
-    550 hp. 7:21.989 at the Nordschleife. A six-cylinder, twin-turbo special edition
-    sitting between the M4 Competition and the limited-run CSL. Select your paint below.
+    510 hp. 650 Nm of torque. The benchmark high-performance coupe with breathtaking dynamics 
+    and unmistakable M design. Select your paint below.
   </p>
 </section>
 
@@ -391,9 +371,8 @@
       </div>
 
       <div class="viewer" id="viewer-container">
-        <div id="loader">LOADING 3D MODEL...</div>
-        <canvas id="webgl-canvas"></canvas>
-        <div class="viewer-instructions">DRAG TO ROTATE · SCROLL TO ZOOM</div>
+        <img id="carImage" src="images/isle_of_man_green.png" alt="BMW M4 Configuration">
+        <div class="viewer-instructions">DYNAMIC VISUALIZER</div>
       </div>
 
       <div class="stage-credit">
@@ -403,10 +382,10 @@
     </div>
 
     <div class="spec-strip">
-      <div class="spec-cell"><div class="label">Power</div><div class="value">550<span class="unit">HP</span></div></div>
-      <div class="spec-cell"><div class="label">0–62 MPH</div><div class="value">3.4<span class="unit">SEC</span></div></div>
-      <div class="spec-cell"><div class="label">Top Speed</div><div class="value">188<span class="unit">MPH</span></div></div>
-      <div class="spec-cell"><div class="label">'Ring Time</div><div class="value">7:21<span class="unit">.989</span></div></div>
+      <div class="spec-cell"><div class="label">Power</div><div class="value">510<span class="unit">HP</span></div></div>
+      <div class="spec-cell"><div class="label">0–62 MPH</div><div class="value">3.5<span class="unit">SEC</span></div></div>
+      <div class="spec-cell"><div class="label">Top Speed</div><div class="value">180<span class="unit">MPH</span></div></div>
+      <div class="spec-cell"><div class="label">Torque</div><div class="value">650<span class="unit">NM</span></div></div>
     </div>
   </div>
 
@@ -434,7 +413,7 @@
 
     <div class="summary">
       <div class="summary-head">// Build Summary · UK RRP</div>
-      <div class="summary-line"><span class="lbl">M4 CS Coupé · base</span><span class="val">£117,100</span></div>
+      <div class="summary-line"><span class="lbl">M4 Competition Coupé · base</span><span class="val">£84,250</span></div>
       <div class="summary-line"><span class="lbl">Paint</span><span class="val" id="sumPaint">—</span></div>
       <div class="summary-line"><span class="lbl">Wheels</span><span class="val" id="sumWheel">—</span></div>
       <div class="summary-line"><span class="lbl">Tyres</span><span class="val" id="sumTire">—</span></div>
@@ -452,53 +431,53 @@
 
 <footer>
   Configurator demo · School project<br>
-  Specifications and aesthetic design modeled after BMW M4 CS UK press materials<br>
+  Specifications and aesthetic design modeled after BMW M4 Competition UK press materials<br>
   Not affiliated with BMW AG
 </footer>
 
 <script>
   const COLORS = [
     { 
-      id: 'riviera',  
-      name: 'Riviera Blue',                
-      hex: '#1c4a7a', 
+      id: 'green',  
+      name: 'Isle of Man Green',                
+      hex: '#1e3d33', 
       price: 0,    
-      individual: true,  
-      meta: 'Individual · Solid',  
-      imgSrc: 'https://hips.hearstapps.com/hmg-prod/images/2025-bmw-m4-cs-111-663a35b1d46b7.jpg' 
+      individual: false,  
+      meta: 'Metallic',  
+      imgSrc: 'images/isle_of_man_green.png' 
     },
     { 
-      id: 'isleman',  
-      name: 'Frozen Isle of Man Green',    
-      hex: '#3a4d3a', 
-      price: 4500, 
-      individual: true,  
-      meta: 'Individual · Frozen', 
-      imgSrc: 'https://hips.hearstapps.com/hmg-prod/images/2025-bmw-m4-cs-115-663a35b2e9b25.jpg' 
+      id: 'yellow',  
+      name: 'Sao Paulo Yellow',    
+      hex: '#d9e33f', 
+      price: 0, 
+      individual: false,  
+      meta: 'Solid', 
+      imgSrc: 'images/sao_paulo_yellow.png' 
     },
     { 
-      id: 'brooklyn', 
+      id: 'grey', 
       name: 'Brooklyn Grey Metallic',      
-      hex: '#5a6065', 
+      hex: '#8d9194', 
       price: 0,    
       individual: false, 
       meta: 'Metallic',            
-      imgSrc: 'https://www.topgear.com/sites/default/files/2024/05/1-BMW-M4-CS.jpg' 
+      imgSrc: 'images/brooklyn_grey.png' 
     },
     { 
-      id: 'sapphire', 
-      name: 'Black Sapphire Metallic',     
-      hex: '#0a0d12', 
+      id: 'red', 
+      name: 'Toronto Red Metallic',     
+      hex: '#b42025', 
       price: 0,    
       individual: false, 
       meta: 'Metallic',            
-      imgSrc: 'https://media.drive.com.au/obj/tx_q:50,rs:auto:1920:1080:1/drive/aus/upload/2024/05/08/BMW_M4_CS_43' 
+      imgSrc: 'images/toronto_red.png' 
     },
   ];
   
   const WHEELS = [
-    { id: 'gold',  name: '827 M · Matte Gold Bronze', color: '#b8942a', meta: '19" / 20" Staggered', price: 0 },
-    { id: 'black', name: '827 M · Matte Black',       color: '#1a1a1a', meta: '19" / 20" Staggered', price: 0 },
+    { id: 'black', name: '826 M · Double-Spoke Black', color: '#1a1a1a', meta: '19" / 20" Staggered', price: 0 },
+    { id: 'bicolor', name: '826 M · Bicolour Black', color: '#8d9194', meta: '19" / 20" Staggered', price: 0 },
     { id: '1000m_gold', name: '1000 M · Frozen Gold Metallic', color: '#c5a059', meta: '20" / 21" M Performance', price: 5800 },
     { id: '1000m_black', name: '1000 M · Jet Black Matt',       color: '#050505', meta: '20" / 21" M Performance', price: 5800 },
   ];
@@ -597,7 +576,7 @@
     $('#sumWheel').textContent = state.wheel.price === 0 ? state.wheel.name : `${state.wheel.name} · +£${fmt(state.wheel.price)}`;
     $('#sumTire').textContent  = state.tire.name;
     $('#sumBrake').textContent = state.brake.price === 0 ? state.brake.name : `${state.brake.name} · +£${fmt(state.brake.price)}`;
-    const total = 117100 + state.color.price + state.wheel.price + state.brake.price;
+    const total = 84250 + state.color.price + state.wheel.price + state.brake.price;
     $('#totalAmt').textContent = fmt(total);
   }
 
@@ -605,175 +584,19 @@
     setVar('--wheel-color', state.wheel.color);
     $('#liveColorName').textContent = state.color.name.toUpperCase();
     
-    if (window.update3DModel) {
-      window.update3DModel(state.color.hex, state.wheel.color);
+    const imgEl = $('#carImage');
+    if (imgEl.src !== state.color.imgSrc) {
+      imgEl.classList.add('loading');
+      setTimeout(() => {
+        imgEl.src = state.color.imgSrc;
+        imgEl.onload = () => imgEl.classList.remove('loading');
+      }, 300);
     }
   }
 
   function applyAll() { renderColors(); renderWheels(); renderTires(); renderBrakes(); updateSummary(); updateCar(); }
   applyAll();
 </script>
-<script type="module">
-  import * as THREE from 'three';
-  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-  import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-  import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
-  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-
-  const container = document.getElementById('viewer-container');
-  const canvas = document.getElementById('webgl-canvas');
-  
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 100);
-  camera.position.set(5, 1.8, 6);
-
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.05;
-  controls.maxPolarAngle = Math.PI / 2;
-  controls.minDistance = 4;
-  controls.maxDistance = 12;
-  controls.target.set(0, 0.6, 0);
-
-  // Reflective Floor
-  const floorGeometry = new THREE.PlaneGeometry(100, 100);
-  const floorMaterial = new THREE.MeshStandardMaterial({ 
-    color: 0x0a0a0a,
-    metalness: 0.8,
-    roughness: 0.15,
-    transparent: true,
-    opacity: 0.8
-  });
-  const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-  floor.rotation.x = -Math.PI / 2;
-  floor.receiveShadow = true;
-  scene.add(floor);
-
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-  scene.add(ambientLight);
-
-  const spotLight = new THREE.SpotLight(0xffffff, 80);
-  spotLight.position.set(5, 10, 5);
-  spotLight.angle = Math.PI / 6;
-  spotLight.penumbra = 1;
-  spotLight.decay = 2;
-  spotLight.distance = 50;
-  spotLight.castShadow = true;
-  spotLight.shadow.mapSize.width = 1024;
-  spotLight.shadow.mapSize.height = 1024;
-  scene.add(spotLight);
-
-  const rimLight = new THREE.DirectionalLight(0xffffff, 2);
-  rimLight.position.set(-5, 2, -5);
-  scene.add(rimLight);
-
-  let carModel;
-  let bodyMaterials = [];
-  let wheelMaterials = [];
-
-  // Setup Loaders
-  const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
-
-  const loader = new GLTFLoader();
-  loader.setDRACOLoader(dracoLoader);
-
-  new RGBELoader()
-    .setPath('https://unpkg.com/three@0.160.0/examples/textures/equirectangular/')
-    .load('royal_esplanade_1k.hdr', function (texture) {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      scene.environment = texture;
-
-      // Loading your M4 CS model
-      loader.load('bmw_m4_cs_g82_2021_sapphire_black_metallic.glb', function (gltf) {
-        carModel = gltf.scene;
-        
-        // Auto-center and scale the model to fit the stage
-        const box = new THREE.Box3().setFromObject(carModel);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 5 / maxDim; 
-        carModel.scale.setScalar(scale);
-        carModel.position.sub(center.multiplyScalar(scale));
-        carModel.position.y = 0; // Ensure it sits on the ground
-
-        carModel.traverse((child) => {
-          if (child.isMesh) {
-            if (child.material) {
-              child.material.envMapIntensity = 1.0;
-              const name = child.material.name.toLowerCase();
-              console.log('Detected Material:', name); // Helpful for debugging
-              
-              // Standard body paint detection
-              const isBody = name.includes('body') || name.includes('paint') || name.includes('carpaint') || name.includes('exterior') || name.includes('primary') || name.includes('metal');
-              const isNotGlass = !name.includes('glass') && !name.includes('window');
-              const isNotPlastic = !name.includes('plastic') && !name.includes('rubber') && !name.includes('black');
-
-              if (isBody && isNotGlass && isNotPlastic) {
-                child.material = new THREE.MeshPhysicalMaterial({
-                  color: new THREE.Color(window.state ? window.state.color.hex : '#1c4a7a'),
-                  metalness: 0.7,
-                  roughness: 0.2,
-                  clearcoat: 1.0,
-                  clearcoatRoughness: 0.1
-                });
-                bodyMaterials.push(child.material);
-              }
-              
-              // Wheels / Rims detection
-              if (name.includes('rim') || name.includes('alloy') || name.includes('wheel') || name.includes('disk')) {
-                if (!name.includes('tire')) {
-                  wheelMaterials.push(child.material);
-                  child.material.color = new THREE.Color(window.state ? window.state.wheel.color : '#b8942a');
-                }
-              }
-            }
-          }
-        });
-
-        carModel.castShadow = true;
-        carModel.receiveShadow = true;
-        scene.add(carModel);
-        document.getElementById('loader').style.display = 'none';
-        
-        if (window.update3DModel && window.state) {
-            window.update3DModel(window.state.color.hex, window.state.wheel.color);
-        }
-      }, undefined, function (error) {
-        document.getElementById('loader').textContent = 'ERROR LOADING MODEL';
-        console.error(error);
-      });
-    });
-
-  window.update3DModel = function(hexColor, wheelColor) {
-    bodyMaterials.forEach(m => m.color.set(hexColor));
-    wheelMaterials.forEach(m => m.color.set(wheelColor));
-  };
-
-  window.addEventListener('resize', () => {
-    if(!container) return;
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
-  }
-  animate();
 </script>
 </body>
 </html>
