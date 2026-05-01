@@ -387,7 +387,7 @@
           <button class="view-toggle active" data-view="side">SIDE PROFILE</button>
           <button class="view-toggle" data-view="front">FRONT 3/4</button>
         </div>
-        <img id="carImage" src="images/side.png" alt="BMW M4 Configuration">
+        <img id="carImage" alt="BMW M4 Configuration">
         <div class="viewer-instructions">DYNAMIC VISUALIZER · CSS ACCELERATED</div>
       </div>
 
@@ -451,6 +451,7 @@
   Not affiliated with BMW AG
 </footer>
 
+<script src="b64.js"></script>
 <script>
   const COLORS = [
     { 
@@ -460,7 +461,7 @@
       price: 0,    
       individual: false,  
       meta: 'Metallic',  
-      sideImg: 'images/side.png',
+      sideImg: b64_green_side,
       filter: 'none'
     },
     { 
@@ -470,7 +471,7 @@
       price: 0, 
       individual: false,  
       meta: 'Solid', 
-      sideImg: 'images/sao_paulo_yellow.png',
+      sideImg: b64_yellow_side,
       filter: 'hue-rotate(-65deg) brightness(1.2) saturate(1.2)'
     },
     { 
@@ -480,7 +481,7 @@
       price: 0,    
       individual: false, 
       meta: 'Metallic',            
-      sideImg: 'images/brooklyn_grey.png',
+      sideImg: b64_grey_side,
       filter: 'saturate(0) brightness(1.3)'
     },
     { 
@@ -490,7 +491,7 @@
       price: 0,    
       individual: false, 
       meta: 'Metallic',            
-      sideImg: 'images/toronto_red.png',
+      sideImg: b64_red_side,
       filter: 'hue-rotate(-130deg) brightness(1.1) saturate(1.1)'
     },
   ];
@@ -615,10 +616,10 @@
     $('#liveColorName').textContent = state.color.name.toUpperCase();
     
     const imgEl = $('#carImage');
-    const targetSrc = state.view === 'side' ? state.color.sideImg : 'images/front.png';
+    const targetSrc = state.view === 'side' ? state.color.sideImg : b64_front;
     const targetFilter = state.view === 'side' ? 'none' : state.color.filter;
 
-    if (forceSwap || !imgEl.src.endsWith(targetSrc)) {
+    if (forceSwap || imgEl.src !== targetSrc) {
       imgEl.src = targetSrc;
     }
     imgEl.style.filter = targetFilter;
