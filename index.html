@@ -135,9 +135,8 @@
     height: 100%; 
     object-fit: cover; 
     z-index: 4;
-    transition: filter 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    transition: filter 0.3s ease-in-out;
   }
-  .viewer img.loading { opacity: 0; }
   .view-toggles {
     position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 10;
     display: flex; gap: 4px; background: rgba(0,0,0,0.5); padding: 4px;
@@ -619,17 +618,10 @@
     const targetSrc = state.view === 'side' ? state.color.sideImg : 'images/front.png';
     const targetFilter = state.view === 'side' ? 'none' : state.color.filter;
 
-    // Check if the filename ends with our targetSrc
     if (forceSwap || !imgEl.src.endsWith(targetSrc)) {
-      imgEl.classList.add('loading');
-      setTimeout(() => {
-        imgEl.src = targetSrc;
-        imgEl.style.filter = targetFilter;
-        imgEl.onload = () => imgEl.classList.remove('loading');
-      }, 50);
-    } else {
-      imgEl.style.filter = targetFilter;
+      imgEl.src = targetSrc;
     }
+    imgEl.style.filter = targetFilter;
   }
 
   function applyAll() { renderColors(); renderWheels(); renderTires(); renderBrakes(); updateSummary(); updateCar(); }
